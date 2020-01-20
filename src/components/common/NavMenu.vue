@@ -26,9 +26,11 @@
       </div>
       <div v-else class="avatar">
         <el-dropdown >
-          <div><el-avatar :size="36" :src="circleUrl" ></el-avatar></div>
+          <div><el-avatar :size="36" :src="portraitUrl" ></el-avatar></div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item ><div @click="toUserInfo"><router-link to="/user" >个人空间</router-link></div></el-dropdown-item>
+            <el-dropdown-item >
+              <div @click="toUserInfo">个人空间</div>
+            </el-dropdown-item>
             <el-dropdown-item>物资</el-dropdown-item>
             <el-dropdown-item>螺蛳粉</el-dropdown-item>
             <el-dropdown-item>双皮奶</el-dropdown-item>
@@ -58,7 +60,7 @@
         isRouterAlive: true,
         user: window.localStorage.getItem('user'),
         //头像url
-        circleUrl: window.localStorage.getItem('user') == null ? '' : JSON.parse(window.localStorage.getItem('user')).portraitUrl,
+        portraitUrl: window.localStorage.getItem('user') == null ? '' : JSON.parse(window.localStorage.getItem('user')).portraitUrl,
 
       }
     },
@@ -75,11 +77,10 @@
       },
       //前往个人中心
       toUserInfo(){
+        //获取localStorage中的id值
         var id = JSON.parse(window.localStorage.getItem('user')).id
-        this.$axios.get('/user/'+id).then(resp => {
-            console.log(resp)
-          }).catch(failResponse => {
-             })
+        //跳转到个人空间页，传id作为参数
+        this.$router.push({ name: 'user', params: {id: id}})
       },
       //logout方法
       logout () {

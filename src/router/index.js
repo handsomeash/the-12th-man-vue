@@ -52,8 +52,8 @@ export default new Router({
           component: ArticleDetail,
         },
         {
-          path: '/user',
-          name: 'User',
+          path: '/user/:id',
+          name: 'user',
           component: UserIndex,
           meta: {
             requireAuth: true
