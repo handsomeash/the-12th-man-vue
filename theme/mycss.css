@@ -1,0 +1,27 @@
+  /*公共全局的css*/
+  a{
+    text-decoration: none;
+    color: #656669;
+  }
+  /*登陆和注册的样式*/
+  .login-container {
+    border-radius: 15px;
+    background-clip: padding-box;
+    margin: auto;
+    width: 250px;
+    padding: 35px 35px 15px 35px;
+    background: #fff;
+    /*border: 1px solid #eaeaea;*/
+    /*box-shadow: 0 0 25px #cac6c6;*/
+  }
+
+  .login_title {
+    margin: 0px auto 40px auto;
+    text-align: center;
+    color: #505458;
+  }
+  .indexBut{
+      float: right;
+      margin-right: 3%;
+      margin-top: 15px;
+    }
