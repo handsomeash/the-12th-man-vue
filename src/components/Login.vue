@@ -2,7 +2,7 @@
   <div>
     <el-menu>
       <router-link to="/index">
-        <el-button type="info" round class="indexBut" size="mini"> 回到主页 </el-button>
+        <el-button type="primary" round class="indexBut" size="mini"> 回到主页 </el-button>
       </router-link>
     </el-menu>
 
@@ -16,11 +16,11 @@
         <el-input type="password" v-model="loginForm.password" auto-complete="off" placeholder="密码" ></el-input>
       </el-form-item>
       <div>
-        <el-checkbox v-model="checked" class="rememberMe"><small>记住我</small></el-checkbox>
-        <router-link to="/" class="findPassword" ><small >找回密码</small></router-link>
+        <el-checkbox v-model="checked" class="font_left"><small>记住我</small></el-checkbox>
+        <router-link to="/" class="font_right" ><small >找回密码</small></router-link>
       </div>
       <el-form-item style="padding-top: 37px;">
-          <el-button type="primary" style="width: 100%;border: none" v-on:click="login('loginForm')">登 录</el-button>
+          <el-button type="danger" class="login_button" v-on:click="login('loginForm')">登 录</el-button>
           <router-link to="/Register"><small>注册账号</small></router-link>
           <div class="message" v-if="show">
             <small v-text="message"></small>
@@ -106,13 +106,6 @@
 </script>
 
 <style scoped>
-
-  .rememberMe{
-    float:left;
-  }
-  .findPassword{
-    float:right;
-  }
   .message{
     color: #F56C6C;
   }

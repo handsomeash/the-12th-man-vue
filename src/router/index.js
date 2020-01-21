@@ -10,6 +10,7 @@ import Home from "../components/Home"
 import ArticleIndex from "../components/article/ArticleIndex"
 import ArticleDetail from "../components/article/ArticleDetail"
 import UserIndex from "../components/user/UserIndex"
+import UserEdit from "../components/user/UserEdit"
 
 Vue.use(Router)
 
@@ -59,6 +60,14 @@ export default new Router({
             requireAuth: true
           }
         },
+        {
+          path: '/edit/:id',
+          name: 'edit',
+          component: UserEdit,
+          meta: {
+            requireAuth: true
+          }
+        }
       ]
     },
     {

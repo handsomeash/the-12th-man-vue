@@ -1,9 +1,9 @@
 <template>
   <div class="main">
-    <el-row :gutter="25">
-    <el-col :span="14" :offset="3"><div class="grid-content bg-purple">xx</div></el-col>
+    <el-row >
+    <el-col :span="13" :offset="3"><div class="grid-content bg-purple">xx</div></el-col>
     <!--个人信息-->
-    <el-col :span="5">
+    <el-col :span="5" :offset="1">
       <div class="grid-content bg-purple ">
 
         <div class="padding-right">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="padding-right">
-          <el-button type="info" round  size="medium"> 编辑个人信息 </el-button>
+          <el-button type="primary" round  size="medium" @click="getEdit"> 编辑个人信息 </el-button>
         </div>
       </div>
 
@@ -38,13 +38,8 @@
     name: 'UserIndex',
     data(){
       return{
-        user: []
-        // user:{
-        //   nickname:'xxxx',
-        //   registerDate:'',
-        //   //头像url
-        //   portraitUrl: require('../../assets/img/touxiang.png'),
-        // }
+        user: [],
+
       }
     },
     //钩子函数
@@ -60,9 +55,15 @@
             console.log(resp.data)
             //赋值
             this.user = resp.data.user
-          }).catch(failResponse => {
-             })
+          }).catch(failResponse => {})
       },
+      //前往编辑页面
+      getEdit(){
+        //获取router传递过来的参数
+        var id = this.$route.params.id
+        //跳转到编辑页面，传id作为参数
+        this.$router.push({ name: 'edit', params: {id: id}})
+      }
     }
   }
 </script>
@@ -76,13 +77,10 @@
     padding-bottom: 30px;
   }
   .mid{
-    border-top:1px solid #F2F4F7;
-    border-bottom:1px solid #F2F4F7
+    border-top:1.5px solid #F2F4F7;
+    border-bottom:1.5px solid #F2F4F7
   }
-  /*边框圆角*/
-  .grid-content {
-    border-radius: 8px;
-  }
+
   .padding-right{
     padding-top: 20px;
     padding-bottom: 20px;

@@ -21,7 +21,7 @@
       </el-input>
       <div v-if="user === null">
         <router-link to="/login">
-          <el-button type="info" round class="loginBut" size="mini"> 登 陆 </el-button>
+          <el-button type="primary" round class="loginBut" size="mini"> 登 陆 </el-button>
         </router-link>
       </div>
       <div v-else class="avatar">
@@ -31,9 +31,9 @@
             <el-dropdown-item >
               <div @click="toUserInfo">个人空间</div>
             </el-dropdown-item>
-            <el-dropdown-item>物资</el-dropdown-item>
-            <el-dropdown-item>螺蛳粉</el-dropdown-item>
-            <el-dropdown-item>双皮奶</el-dropdown-item>
+            <el-dropdown-item >
+              <div @click="getEdit">修改信息</div>
+            </el-dropdown-item>
             <el-dropdown-item><div @click="logout">退出</div></el-dropdown-item>
 
           </el-dropdown-menu>
@@ -81,6 +81,13 @@
         var id = JSON.parse(window.localStorage.getItem('user')).id
         //跳转到个人空间页，传id作为参数
         this.$router.push({ name: 'user', params: {id: id}})
+      },
+      //前往编辑页面
+      getEdit(){
+        //获取localStorage中的id值
+        var id = JSON.parse(window.localStorage.getItem('user')).id
+        //跳转到编辑页面，传id作为参数
+        this.$router.push({ name: 'edit', params: {id: id}})
       },
       //logout方法
       logout () {

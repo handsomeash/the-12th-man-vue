@@ -2,7 +2,7 @@
   <div>
     <el-menu>
       <router-link to="/index">
-        <el-button type="info" round class="indexBut" size="mini"> 回到主页 </el-button>
+        <el-button type="primary" round class="indexBut" size="mini"> 回到主页 </el-button>
       </router-link>
     </el-menu>
 
@@ -21,7 +21,7 @@
         <el-input type="password" v-model="registForm.password" auto-complete="off" placeholder="密码"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" style="width: 100%;border: none" v-on:click="register('registForm')">注 册</el-button>
+        <el-button type="danger" class="login_button" v-on:click="register('registForm')">注 册</el-button>
       <router-link to="/login"><small>已有账号，登陆</small></router-link><br />
       </el-form-item>
     </el-form>
@@ -51,7 +51,7 @@
               ],
               nickname:[
                 { required: true, message: '昵称不能为空', trigger: 'blur' },
-                { min: 3, max: 20, message: '账号长度在 3~20 个字符之间', trigger: 'blur' }
+                { min: 2, max: 20, message: '账号长度在 2~20 个字符之间', trigger: 'blur' }
               ],
               email:[
                 { required: true, message: '邮箱不能为空', trigger: 'blur' },
