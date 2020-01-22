@@ -2,8 +2,14 @@
   <!-- Element 提供的 Container 布局容器-->
   <el-container>
     <el-main >
-      <h3 class="title">文章</h3><br />
-      <SingleArticle class="article-area"></SingleArticle>
+      <el-row>
+
+        <el-col :span="1" :offset="3"><h3 class="title">文章</h3></el-col>
+        <el-col :span="20" :offset="3"><div>
+          <SingleArticle ></SingleArticle>
+        </div></el-col>
+      </el-row>
+
     </el-main>
   </el-container>
 </template>
@@ -17,12 +23,4 @@
 </script>
 
 <style scoped>
-  .article-area{
-    /* background-color: #0000FF; */
-    width: 1150px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-
 </style>

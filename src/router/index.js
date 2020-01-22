@@ -43,9 +43,6 @@ export default new Router({
           path: '/article',
           name:'Article',
           component: ArticleIndex,
-          meta: {
-            requireAuth: true
-          }
         },
         {
           path: '/articleDetail',
