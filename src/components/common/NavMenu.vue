@@ -53,6 +53,7 @@
           {name: '/index', navItem: '首页'},
           {name: '/article', navItem: '文章'},
           {name: '/information', navItem: '资讯'},
+          {name: '/write', navItem: '发表文章'},
           {name: '/messageBoard', navItem: '留言板'},
           {name: '/admin/dashboard', navItem: '管理中心'}
         ],

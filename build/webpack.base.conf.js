@@ -8,6 +8,8 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
+var webpack = require('webpack');
+
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
@@ -20,6 +22,13 @@ const createLintingRule = () => ({
 })
 
 module.exports = {
+  //文本编辑器中，修改图片大小相关配置
+  plugins: [
+      new webpack.ProvidePlugin({
+        'window.Quill': 'quill/dist/quill.js',
+        'Quill': 'quill/dist/quill.js'
+      })
+    ],
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'

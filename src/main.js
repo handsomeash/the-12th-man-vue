@@ -10,6 +10,10 @@ import ElementUI from 'element-ui'
 import router from './router'
 //添加对 store 的引用
 import store from './store'
+//引入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.snow.css'
+import '../theme/fonts/font.css'
 
 //设置反向代理，前端默认请求发送到 http://localhost:8443/api
 var axios = require('axios')
@@ -23,6 +27,7 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
+Vue.use(VueQuillEditor);
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {
