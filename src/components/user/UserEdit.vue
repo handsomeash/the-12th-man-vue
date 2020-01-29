@@ -42,7 +42,14 @@
               </el-col>
               <el-col :span="14" :offset="2">
                 <el-row>
-                  <el-col :span="24"><el-button round  size="medium" class="head_btn font_left">修改头像</el-button></el-col>
+                  <el-col :span="24">
+                    <!--上传头像图片组件-->
+                    <div class="font_left">
+                      <img-upload @onUpload="uploadImg" ref="imgUpload"></img-upload>
+                    </div>
+
+                    <!-- <el-button round  size="medium" class="head_btn font_left">修改头像</el-button> -->
+                  </el-col>
                   <el-col :span="24">
                     <div class="head_introduce font_left">
                       <small >图片格式支持JPG、JPEG、PNG等</small>
@@ -135,10 +142,11 @@
 </template>
 
 <script>
+  import ImgUpload from './ImgUpload'
   import EditPassword from './EditPassword'
   export default {
     name: 'UserEdit',
-    components: {EditPassword},
+    components: {EditPassword,ImgUpload},
     data(){
       return{
         user: {
@@ -172,6 +180,10 @@
       this.getUserInfo()
     },
     methods:{
+      //上传图片
+      uploadImg () {
+        this.user.portraitUrl = this.$refs.imgUpload.url
+      },
       //使修改密码组件显示
       editpasswordform(){
         this.$refs.editpassword.dialogFormVisible = true
@@ -197,9 +209,19 @@
               birthday: this.user.birthday,
               phone: this.user.phone,
               email: this.user.email,
+              portraitUrl: this.user.portraitUrl,
             }).then(resp =>{
               if (resp.data.code === 200) {
                 console.log('修改成功');
+
+                var data = resp.data.data
+                //如果获取到头像url，更新localStorage中的值
+                if(data !== null){
+                  console.log('获取到头像url');
+                  this.$store.commit('login', data)
+                  //刷新，让头像及时显示
+                  location.reload()
+                }
                 //修改成功
                   this.$alert(resp.data.message, '提示', {
                     confirmButtonText: '确定'
