@@ -13,6 +13,18 @@
       </el-col>
       <el-col :span="19" :offset="3">
         <div class="mid_title ">
+          文章封面
+        </div>
+      </el-col>
+      <el-col :span="19" :offset="3">
+        <div style="background-color: #FFFFFF;">
+          <!-- <el-image :src="imgurl"></el-image> -->
+          <img-upload @onUpload="uploadImg" ref="imgUpload"></img-upload>
+        </div>
+      </el-col>
+
+      <el-col :span="19" :offset="3">
+        <div class="mid_title ">
           文章内容
         </div>
       </el-col>
@@ -44,6 +56,7 @@
 </template>
 
 <script>
+  import ImgUpload from './ImgUpload'
   import { quillEditor } from 'vue-quill-editor'
   import * as Quill from 'quill'  //引入编辑器
   //quill图片可拖拽改变大小
@@ -58,12 +71,13 @@
 
   export default {
     name: "Write",
+    components: {ImgUpload},
     data(){
       return {
         content: '',
         title: '',
-        imgurl: '../../../static/img/UK.jpg',
-        userid: JSON.parse(window.localStorage.getItem('user')).id,
+        imgurl: '',
+        userid: JSON.parse(window.sessionStorage.getItem('user')).id,
         editorOption: {
           modules: {
             imageResize: {} ,
@@ -99,6 +113,10 @@
       },
     },
     methods: {
+        //上传图片
+        uploadImg () {
+          this.imgurl = this.$refs.imgUpload.url
+        },
         onEditorReady(editor) { // 准备编辑器
         },
         onEditorBlur(){}, // 失去焦点事件

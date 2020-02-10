@@ -219,13 +219,24 @@
                 if(data !== null){
                   console.log('获取到头像url');
                   this.$store.commit('login', data)
-                  //刷新，让头像及时显示
-                  location.reload()
+                  //修改成功，刷新页面，头像改变了
+                    this.$alert(resp.data.message, '提示', {
+                      confirmButtonText: '确定',
+                      //回调函数
+                      callback: action => {
+                         onclick:{
+                           //刷新，让头像及时显示
+                           location.reload()
+                         }
+                      }
+                    })
+                }else{
+                  //修改成功，不必刷新页面，因为头像没有变
+                    this.$alert(resp.data.message, '提示', {
+                      confirmButtonText: '确定'
+                    })
                 }
-                //修改成功
-                  this.$alert(resp.data.message, '提示', {
-                    confirmButtonText: '确定'
-                  })
+
               }else {
                 console.log('修改失败');
                 //修改失败

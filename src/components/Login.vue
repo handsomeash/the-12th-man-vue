@@ -79,9 +79,9 @@
                              //获取到后端传过来的user对象
                              var data = resp.data.data
                              console.log(data.id)
-                             //存储到localstorage
+                             //存储到sessionstorage
                              _this.$store.commit('login', data)
-                             console.log(window.localStorage.getItem('user').toString())
+                             console.log(window.sessionStorage.getItem('user').toString())
                              var path = _this.$route.query.redirect
                              _this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
                              // this.$router.replace({path: '/index'})

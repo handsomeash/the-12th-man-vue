@@ -46,7 +46,7 @@ export default new Router({
           component: ArticleIndex,
         },
         {
-          path: '/articleDetail',
+          path: '/article/:id',
           name: 'ArticleDetail',
           component: ArticleDetail,
         },

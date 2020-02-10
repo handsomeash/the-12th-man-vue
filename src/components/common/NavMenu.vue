@@ -59,9 +59,9 @@
         ],
         keywords: '',
         isRouterAlive: true,
-        user: window.localStorage.getItem('user'),
+        user: window.sessionStorage.getItem('user'),
         //头像url
-        portraitUrl: window.localStorage.getItem('user') == null ? '' : JSON.parse(window.localStorage.getItem('user')).portraitUrl,
+        portraitUrl: window.sessionStorage.getItem('user') == null ? '' : JSON.parse(window.sessionStorage.getItem('user')).portraitUrl,
 
       }
     },
@@ -78,15 +78,15 @@
       },
       //前往个人中心
       toUserInfo(){
-        //获取localStorage中的id值
-        var id = JSON.parse(window.localStorage.getItem('user')).id
+        //获取sessionStorage中的id值
+        var id = JSON.parse(window.sessionStorage.getItem('user')).id
         //跳转到个人空间页，传id作为参数
         this.$router.push({ name: 'user', params: {id: id}})
       },
       //前往编辑页面
       getEdit(){
-        //获取localStorage中的id值
-        var id = JSON.parse(window.localStorage.getItem('user')).id
+        //获取sessionStorage中的id值
+        var id = JSON.parse(window.sessionStorage.getItem('user')).id
         //跳转到编辑页面，传id作为参数
         this.$router.push({ name: 'edit', params: {id: id}})
       },

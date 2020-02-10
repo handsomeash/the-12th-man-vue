@@ -1,7 +1,7 @@
 <template>
-   <el-upload
+  <el-upload
     ref="upload"
-    action="http://localhost:8443/api/editPortrait"
+    action="http://localhost:8443/api/cover"
     :show-file-list="false"
     :on-preview="handlePreview"
     :on-remove="handleRemove"
@@ -12,7 +12,9 @@
     :on-exceed="handleExceed"
     :file-list="fileList"
     >
-    <el-button round  size="medium" class="head_btn ">修改头像</el-button>
+    <img v-if="url" :src="url" class="avatar">
+    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+    <!-- <el-button round  size="medium" class="head_btn ">上传封面</el-button> -->
   </el-upload>
 </template>
 
@@ -49,9 +51,19 @@
 </script>
 
 <style scoped>
-  .head_btn{
-    color: #8C939D ;
-    border: 2.5px solid #E6E6E6 ;
+  .avatar-uploader-icon {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    font-size: 35px;
+    color: #8c939d;
+    width: 1188px;
+    height: 100%;
+    line-height: 200px;
+    text-align: center;
   }
-
+  .avatar {
+    width: auto;
+    height:200px;
+    display: block;
+  }
 </style>

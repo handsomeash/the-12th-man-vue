@@ -9,8 +9,10 @@
             <img :src="item.imgUrl" alt="封面" class="cover">
           </div>
 
-          <div class="title">
-            <a href="">{{item.title}}</a>
+          <div class="title" >
+            <!-- <a href="">{{item.title}}</a> -->
+            <a href="" @click="toArticle(item.articleDetailId)">{{item.title}}</a>
+            <!-- <a :href="toArticle(item.id)" >{{item.title}}</a> -->
           </div>
 
           <div style="padding-top: 20px;">
@@ -74,6 +76,15 @@
       handleCurrentChange(val) {
         this.currentPage = val
         this.getArticles()
+      },
+      //前往文章页面
+      toArticle(id){
+        this.$router.push({ name: 'ArticleDetail', params: {id: id}})
+        // this.$axios.get('/articleDetail/'+id).then(resp => {
+        //     console.log(resp.data)
+        //     //赋值
+        //     this.user = resp.data.user
+        //   }).catch(failResponse => {})
       }
     }
   }
@@ -93,12 +104,7 @@
   .cover {
     width: 100%;
     display: block;
-   /* width: 115px;
-    height: 172px;
-    margin-bottom: 7px;
-    overflow: hidden;
-    cursor: pointer; */
-    /* background-color: #0000FF; */
+
   }
 
   .title {
