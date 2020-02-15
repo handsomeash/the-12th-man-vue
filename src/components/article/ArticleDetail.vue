@@ -1,12 +1,27 @@
 <template>
   <!--整个背景是白色的-->
-  <div style="background-color: #FFFFFF; padding-top: 50px;">
+  <div style="background-color: #FFFFFF; ">
+    <!--回到顶部组件-->
+    <el-backtop :bottom="70" style="background-color: #2B2D33;color: #FFFFFF;"></el-backtop>
+    <div class="float">
+      <p>
+        <el-button type="primary" icon="el-icon-star-on" @click="collect" circle ></el-button>
+      </p>
+      <p>
+        <el-button type="primary" icon="el-icon-chat-dot-round"  circle></el-button>
+      </p>
+      <p>
+        <el-button type="primary" icon="el-icon-share"  circle></el-button>
+      </p>
+
+    </div>
+
     <el-row>
-      <el-col :span="17" :offset="4">
+      <el-col :span="19" :offset="4">
         <!--文章主体-->
           <!--文章标题和封面-->
           <el-row>
-            <el-col :span="12">
+            <el-col :span="10">
               <div class="top_left_father">
                 <div class="top_left_son">
 
@@ -38,7 +53,7 @@
               </div>
             </el-col>
 
-            <el-col :span="12"><div ><img :src="article.imgUrl"  class="cover grid-content"></div></el-col>
+            <el-col :span="14"><div ><img :src="article.imgUrl"  class="cover grid-content"></div></el-col>
           </el-row>
 
         <!-- <div v-html="article.content" class="article">
@@ -63,7 +78,6 @@
       return {
         article: [],
         author: [],
-        imgUrl: '../../../static/img/UK.jpg'
       }
     },
     //钩子函数
@@ -80,6 +94,33 @@
           this.article = resp.data.article
           this.author = resp.data.author
         }).catch(failResponse => {})
+      },
+      //收藏文章
+      collect(){
+        var user = JSON.parse(window.sessionStorage.getItem('user'))
+        if(user == null){
+          this.$alert("请先登录", '提示', {
+            confirmButtonText: '确定'
+          })
+        }else{
+          var userId = JSON.parse(window.sessionStorage.getItem('user')).id
+           this.$axios.put('/article/collect',{
+            userId: userId,
+            articleId : this.article.id,
+          }).then(resp =>{
+            if (resp.data.code === 200){
+               this.$message({
+                message: resp.data.message,
+                type: 'success'
+              })
+            }else{
+              this.$message({
+                message: resp.data.message,
+                type: 'warning'
+              })
+            }
+          }).catch(failResponse => {})
+        }
       },
     }
   }
@@ -121,5 +162,12 @@
   .article{
     text-align: left;
     margin-top: 80px;
+  }
+  .float{
+    position:fixed;
+    left: 60px;
+    top: 550px;
+    z-index: 1;
+
   }
 </style>

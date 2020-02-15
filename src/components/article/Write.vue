@@ -124,7 +124,7 @@
         onEditorChange(){}, // 内容改变事件
         //发表文章
         write(){
-          this.$axios.post('/article/write',{
+          this.$axios.post('/write',{
             title: this.title,
             content: this.content,
             userid: this.userid,

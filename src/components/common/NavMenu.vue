@@ -7,7 +7,9 @@
       @select="handleSelect"
       background-color="white"
       text-color="#222"
-      style="min-width: 1300px">
+      style="min-width: 1300px"
+      class="edit"
+      >
       <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" class="navFont">
         {{ item.navItem }}
       </el-menu-item>
@@ -129,6 +131,9 @@
     float: right;
     margin-right: 3%;
     margin-top: 9px;
+  }
+  .edit{
+    border:none !important;
   }
 
 </style>

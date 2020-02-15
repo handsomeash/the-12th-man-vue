@@ -43,7 +43,6 @@ router.beforeEach((to, from, next) => {
           console.log("通过记住我登陆："+window.sessionStorage.getItem('user').toString())
           //刷新
           location.reload()
-          next()
         }
       })
     }
