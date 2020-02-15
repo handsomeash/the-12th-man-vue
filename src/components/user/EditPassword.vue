@@ -53,7 +53,7 @@
           if (valid) {
             //获取router传递过来的参数
             var id = this.$route.params.id
-            this.$axios.put('/edit/password',{
+            this.$axios.put('/user/edit/password',{
               userId: id,
               oldPassword: this.editPasswordForm.oldPassword,
               newPassword: this.editPasswordForm.newPassword,

@@ -1,7 +1,7 @@
 <template>
    <el-upload
     ref="upload"
-    action="http://localhost:8443/api/editPortrait"
+    action="http://localhost:8443/api/user/editPortrait"
     :show-file-list="false"
     :on-preview="handlePreview"
     :on-remove="handleRemove"

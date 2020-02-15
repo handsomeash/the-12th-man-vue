@@ -30,8 +30,29 @@ Vue.use(ElementUI);
 Vue.use(VueQuillEditor);
 
 router.beforeEach((to, from, next) => {
+
+    if(store.state.user.id){
+        next()
+    }else{
+        axios.get('/isRememberMe').then(resp => {
+        if (resp.data.code == 200 ){
+          //获取到后端传过来的user对象
+          var data = resp.data.data
+          //存储到sessionstorage
+          store.commit('login', data)
+          console.log("通过记住我登陆："+window.sessionStorage.getItem('user').toString())
+          //刷新
+          location.reload()
+          next()
+        }
+      })
+    }
+
     if (to.meta.requireAuth) {
       if (store.state.user.id) {
+        // axios.get('/authentication').then(resp => {
+        //   if (resp.data.code == 200 ) next()
+        // })
         next()
       } else {
         next({

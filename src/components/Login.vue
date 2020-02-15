@@ -72,7 +72,9 @@
                    //这里是axios和后端交互
                    this.$axios.post('/login', {
                        username: this.loginForm.username,
-                       password: this.loginForm.password
+                       password: this.loginForm.password,
+                       //是否勾选了记住我
+                       rememberme: this.checked
                    }).then(resp => {
                          console.log(resp.data.message);
                            if (resp.data.code === 200) {

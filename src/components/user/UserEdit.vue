@@ -192,7 +192,7 @@
       getUserInfo(){
         //获取router传递过来的参数
         var id = this.$route.params.id
-        this.$axios.get('/edit/'+id).then(resp => {
+        this.$axios.get('/user/edit/'+id).then(resp => {
           console.log(resp.data)
           //赋值
           this.user = resp.data
@@ -202,7 +202,7 @@
       edit(formName){
         this.$refs[formName].validate((valid) =>{
           if (valid) {
-            this.$axios.put('/edit',{
+            this.$axios.put('/user/edit',{
               id: this.user.id,
               nickname: this.user.nickname,
               gender: this.user.gender,
@@ -215,7 +215,7 @@
                 console.log('修改成功');
 
                 var data = resp.data.data
-                //如果获取到头像url，更新localStorage中的值
+                //如果获取到头像url，更新sessionStorage中的值
                 if(data !== null){
                   console.log('获取到头像url');
                   this.$store.commit('login', data)
