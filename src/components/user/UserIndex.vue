@@ -1,7 +1,21 @@
 <template>
   <div class="main">
     <el-row >
-    <el-col :span="13" :offset="3"><div class="grid-content bg-purple">xx</div></el-col>
+    <el-col :span="13" :offset="3">
+      <div class="grid-content bg-purple">
+        <div class="left_title">
+          投稿的文章
+        </div>
+        <div class="left_title">
+          收藏的文章
+        </div>
+        <div class="left_article">
+          <collectArticle ref="CollectArticle"></collectArticle>
+        </div>
+
+
+      </div>
+    </el-col>
     <!--个人信息-->
     <el-col :span="5" :offset="1">
       <div class="grid-content bg-purple ">
@@ -34,8 +48,10 @@
 </template>
 
 <script>
+  import CollectArticle from './CollectArticle'
   export default {
     name: 'UserIndex',
+    components: {CollectArticle},
     data(){
       return{
         user: [],
@@ -101,5 +117,16 @@
     font-family: "microsoft yahei";
     font-size: 13px;
     padding-bottom: 6px;
+  }
+  .left_title{
+    text-align: left;
+    color: #222;
+    font-weight: 700;
+    padding: 30px;
+    padding-left: 60px;
+  }
+  .left_article{
+    padding-left: 40px;
+    padding-bottom: 20px;
   }
 </style>

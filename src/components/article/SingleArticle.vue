@@ -79,12 +79,8 @@
       },
       //前往文章页面
       toArticle(id){
+        console.log('前往文章页面')
         this.$router.push({ name: 'ArticleDetail', params: {id: id}})
-        // this.$axios.get('/articleDetail/'+id).then(resp => {
-        //     console.log(resp.data)
-        //     //赋值
-        //     this.user = resp.data.user
-        //   }).catch(failResponse => {})
       }
     }
   }

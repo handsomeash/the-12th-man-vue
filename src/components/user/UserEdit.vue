@@ -226,7 +226,7 @@
                       callback: action => {
                          onclick:{
                            //刷新，让头像及时显示
-                           location.reload()
+                           this.reload()
                          }
                       }
                     })

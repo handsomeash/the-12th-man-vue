@@ -47,8 +47,8 @@
 
 <script>
   export default {
+    inject:["reload"],
     name: 'NavMenu',
-
     data () {
       return {
         navList: [
@@ -101,8 +101,7 @@
             // 前后端状态保持一致
             _this.$store.commit('logout')
             //刷新，否则头像等信息依旧会显示
-            location.reload()
-            // _this.$router.replace('/index')
+            this.reload()
           }
         })
       },
