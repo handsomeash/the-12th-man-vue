@@ -47,17 +47,12 @@
                     </el-col>
                   </el-row>
 
-
-
                 </div>
               </div>
             </el-col>
 
             <el-col :span="14"><div ><img :src="article.imgUrl"  class="cover grid-content"></div></el-col>
           </el-row>
-
-        <!-- <div v-html="article.content" class="article">
-        </div> -->
 
       </el-col>
     </el-row>
@@ -68,16 +63,71 @@
         </div>
       </el-col>
     </el-row>
+
+    <!--评论区组件-->
+    <el-row>
+      <el-col :span="13" :offset="6">
+
+        <div>
+          <el-row>
+            <el-col :span="24"><div class="topx font_left"><p>评论区</p></div></el-col>
+          </el-row>
+
+          <el-row>
+            <el-col :span="21"><div><el-input v-model="input"  placeholder="请输入内容" class="comment"></el-input></div></el-col>
+            <el-col :span="2" :offset="1"><div><el-button :disabled="!input" round type="primary" @click="write">发表</el-button></div></el-col>
+          </el-row>
+
+          <el-row class="totalComment">
+            <el-col :span="24"><div class="topx font_left "><p>共xx条评论</p></div></el-col>
+          </el-row>
+
+          <el-row>
+            <!--for循环评论内容-->
+            <el-col :span="24" style="text-align: left;">
+              <div v-for="(item,i) in commentResp">
+
+                <el-row class="comment_top">
+                  <el-col :span="2"><div><el-avatar :size="45" :src="item.user.portraitUrl" ></el-avatar></div></el-col>
+                  <el-col :span="22">
+                    <div class="user">
+                      {{item.user.nickname}}
+                    </div>
+                    <div class="time">{{item.createDate}}</div>
+                  </el-col>
+                </el-row>
+
+                <el-row class="">
+                  <el-col :span="24">
+                    <div class="comment_text">
+                      {{item.content}}
+                    </div>
+                  </el-col>
+
+                </el-row>
+
+
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
   export default {
+    inject:["reload"],
     name: 'ArticleDetail',
     data () {
       return {
         article: [],
         author: [],
+        commentResp: [],
+        input: '',
+        portraitUrl: '',
       }
     },
     //钩子函数
@@ -93,7 +143,12 @@
           //赋值
           this.article = resp.data.article
           this.author = resp.data.author
+
+          //将获取到的文章id传给评论组件
+          this.getComment(resp.data.article.id)
+
         }).catch(failResponse => {})
+
       },
       //收藏文章
       collect(){
@@ -122,6 +177,49 @@
           }).catch(failResponse => {})
         }
       },
+      //用户发表评论
+      write(){
+        if(window.sessionStorage.getItem('user') == null){
+          this.$alert("请先登录", '提示', {
+            confirmButtonText: '确定'
+          })
+        }else{
+          var date = new Date()
+          this.$axios.post('/comment', {
+            //获取父组件的data中的值
+            articleId: this.article.id,
+            content: this.input,
+            createDate: date,
+            userId: JSON.parse(window.sessionStorage.getItem('user')).id
+
+          }).then(resp =>{
+            if (resp.data.code === 200){
+              this.$alert(resp.data.message, '提示', {
+                confirmButtonText: '确定',
+                //回调函数
+                callback: action => {
+                   onclick:{
+                     //刷新，让头像及时显示
+                     this.reload()
+                   }
+                }
+              })
+            }
+
+          }).catch(failResponse => {})
+        }
+
+      },
+      //获取所有该文章下的评论
+      getComment(articleId){
+        this.$axios.get('/comment/'+articleId).then(resp => {
+          console.log("评论")
+          console.log(resp.data)
+          //赋值
+          this.commentResp = resp.data
+
+        }).catch(failResponse => {})
+      }
     }
   }
 </script>
@@ -169,5 +267,27 @@
     top: 550px;
     z-index: 1;
 
+  }
+  .topx{
+    font-size: 16px;
+    font-weight: 900;
+  }
+  .totalComment{
+    border-bottom: 1px solid #DCDFE6;
+    margin-top: 5px;
+  }
+  .comment_top{
+    margin-top: 25px;
+  }
+  .comment_text{
+    margin-left: 70px;
+  }
+  .user{
+    font-size: 16px;
+    font-weight: 900;
+  }
+  .time{
+    font-size: 13px;
+    /* font-weight: 900; */
   }
 </style>

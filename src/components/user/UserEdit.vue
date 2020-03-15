@@ -145,6 +145,7 @@
   import ImgUpload from './ImgUpload'
   import EditPassword from './EditPassword'
   export default {
+    inject:["reload"],
     name: 'UserEdit',
     components: {EditPassword,ImgUpload},
     data(){

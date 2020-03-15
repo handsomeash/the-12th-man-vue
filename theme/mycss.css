@@ -40,3 +40,7 @@
   .grid-content {
     border-radius: 8px;
   }
+
+  .comment input.el-input__inner{
+    border-radius: 30px
+  }
