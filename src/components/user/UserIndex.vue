@@ -32,8 +32,8 @@
             <el-col :span="12" class="num_title"><div>收藏文章数</div></el-col>
           </el-row>
           <el-row>
-            <el-col :span="12" class="num">{{userDetail.articleNum}}</el-col>
-            <el-col :span="12" class="num">{{userDetail.collectionNum}}</el-col>
+            <el-col :span="12" class="num">{{user.articleNum}}</el-col>
+            <el-col :span="12" class="num">{{user.collectionNum}}</el-col>
           </el-row>
         </div>
 
@@ -55,7 +55,7 @@
     data(){
       return{
         user: [],
-        userDetail: [],
+        // userDetail: [],
       }
     },
     //钩子函数
@@ -70,8 +70,8 @@
         this.$axios.get('/user/'+id).then(resp => {
             console.log(resp.data)
             //赋值
-            this.user = resp.data.user
-            this.userDetail = resp.data.userDetail
+            this.user = resp.data
+            // this.userDetail = resp.data.userDetail
           }).catch(failResponse => {})
       },
       //前往编辑页面

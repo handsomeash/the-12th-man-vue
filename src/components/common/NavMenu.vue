@@ -101,7 +101,8 @@
             // 前后端状态保持一致
             _this.$store.commit('logout')
             //刷新，否则头像等信息依旧会显示
-            this.reload()
+            location.reload();
+            // this.reload()
           }
         })
       },

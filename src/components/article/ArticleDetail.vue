@@ -35,12 +35,12 @@
 
                   <el-row>
                     <el-col :span="24">
-                      <div class="author">
+                      <div class="author" v-if="article.author">
                         <div class="font_left">
-                          <el-avatar :size="60" :src="author.portraitUrl" ></el-avatar>
+                          <el-avatar :size="60" :src="article.author.portraitUrl" ></el-avatar>
                         </div>
                         <div style="padding-left: 80px; ">
-                          <p>{{author.nickname}}</p>
+                          <p>{{article.author.nickname}}</p>
                           <p>{{article.createDate}}</p>
                         </div>
                       </div>
@@ -87,7 +87,7 @@
             <el-col :span="24" style="text-align: left;">
               <div v-for="(item,i) in commentResp">
 
-                <el-row class="comment_top">
+                <el-row class="comment_top" v-if="item.user">
                   <el-col :span="2"><div><el-avatar :size="45" :src="item.user.portraitUrl" ></el-avatar></div></el-col>
                   <el-col :span="22">
                     <div class="user">
@@ -124,10 +124,9 @@
     data () {
       return {
         article: [],
-        author: [],
+        // author: [],
         commentResp: [],
         input: '',
-        portraitUrl: '',
       }
     },
     //钩子函数
@@ -141,11 +140,12 @@
         this.$axios.get('/article/'+id).then(resp => {
           console.log(resp.data)
           //赋值
-          this.article = resp.data.article
-          this.author = resp.data.author
+          this.article = resp.data
+          // this.author = resp.data.author
 
           //将获取到的文章id传给评论组件
-          this.getComment(resp.data.article.id)
+          this.getComment(resp.data.id)
+          // this.getComment(resp.data.article.id)
 
         }).catch(failResponse => {})
 
