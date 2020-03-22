@@ -7,11 +7,11 @@ import Login from '../components/Login'
 import HelloWorld from '@/components/HelloWorld'
 import Register from "../components/Register"
 import Home from "../components/Home"
-import ArticleIndex from "../components/article/ArticleIndex"
 import ArticleDetail from "../components/article/ArticleDetail"
 import UserIndex from "../components/user/UserIndex"
 import UserEdit from "../components/user/UserEdit"
 import Write from "../components/article/Write"
+import ArticleIndex from "../components/article/ArticleIndex"
 
 Vue.use(Router)
 
@@ -41,8 +41,8 @@ export default new Router({
           // }
         },
         {
-          path: '/article',
-          name:'Article',
+          path: '/articles/:type',
+          name:'articles',
           component: ArticleIndex,
         },
         {

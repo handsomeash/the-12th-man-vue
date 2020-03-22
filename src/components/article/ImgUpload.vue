@@ -56,14 +56,14 @@
     border-radius: 6px;
     font-size: 35px;
     color: #8c939d;
-    width: 1188px;
-    height: 100%;
-    line-height: 200px;
+    width: 500px;
+    /* height: 100%; */
+    line-height: 160px;
     text-align: center;
   }
   .avatar {
     width: auto;
-    height:200px;
+    height:160px;
     display: block;
   }
 </style>

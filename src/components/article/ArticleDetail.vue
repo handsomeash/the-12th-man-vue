@@ -124,7 +124,6 @@
     data () {
       return {
         article: [],
-        // author: [],
         commentResp: [],
         input: '',
       }
@@ -141,11 +140,9 @@
           console.log(resp.data)
           //赋值
           this.article = resp.data
-          // this.author = resp.data.author
 
           //将获取到的文章id传给评论组件
           this.getComment(resp.data.id)
-          // this.getComment(resp.data.article.id)
 
         }).catch(failResponse => {})
 
@@ -213,8 +210,6 @@
       //获取所有该文章下的评论
       getComment(articleId){
         this.$axios.get('/comment/'+articleId).then(resp => {
-          console.log("评论")
-          console.log(resp.data)
           //赋值
           this.commentResp = resp.data
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu
+    <!-- <el-menu
       :default-active="this.$route.path"
       router
       mode="horizontal"
@@ -9,10 +9,24 @@
       text-color="#222"
       style="min-width: 1300px"
       class="edit"
-      >
-      <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" class="navFont">
+      > -->
+      <!-- <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" class="navFont">
         {{ item.navItem }}
-      </el-menu-item>
+      </el-menu-item> -->
+      <el-menu
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="white"
+        text-color="#222"
+        style="min-width: 1300px"
+        class="edit navFont"
+        >
+      <el-menu-item index="1">首页</el-menu-item>
+      <el-menu-item index="2">篮球专题</el-menu-item>
+      <el-menu-item index="3">足球专题</el-menu-item>
+      <el-menu-item index="4">发表文章</el-menu-item>
+      <el-menu-item index="5">个人空间</el-menu-item>
+
       <span style="position: absolute;padding-top: 11px;right: 44%;font-size: 20px;color: #F44336 ;font-weight: 900;"> - The 12th Man - </span>
       <el-input
         placeholder="搜索..."
@@ -51,14 +65,6 @@
     name: 'NavMenu',
     data () {
       return {
-        navList: [
-          {name: '/index', navItem: '首页'},
-          {name: '/article', navItem: '文章'},
-          {name: '/information', navItem: '资讯'},
-          {name: '/write', navItem: '发表文章'},
-          {name: '/messageBoard', navItem: '留言板'},
-          {name: '/admin/dashboard', navItem: '管理中心'}
-        ],
         keywords: '',
         isRouterAlive: true,
         user: window.sessionStorage.getItem('user'),
@@ -73,22 +79,53 @@
       }
     },
     methods: {
+      //导航路由
       handleSelect (key, keyPath) {
-        console.log(key)
-        console.log('...')
-        console.log(keyPath)
+         switch(key){
+           case '1':
+               this.$router.push('/index');
+               break;
+           case '2':
+               this.$router.push({ name: 'articles', params: {type: "BASKETBALL"}})
+               break;
+           case '3':
+               this.$router.push({ name: 'articles', params: {type: "FOOTBALL"}})
+               break;
+           case '4':
+               if(this.user == null){
+                 this.$alert("请先登录", '提示', {
+                   confirmButtonText: '确定'
+                 })
+               }else{
+                 this.$router.push('/write')
+               }
+
+               break;
+           case '5':
+              if(this.user == null){
+                this.$alert("请先登录", '提示', {
+                  confirmButtonText: '确定'
+                })
+              }else{
+                //获取sessionStorage中的id值
+                var id = JSON.parse(this.user).id
+                //跳转到个人空间页，传id作为参数
+                this.$router.push({ name: 'user', params: {id: id}})
+              }
+               break;
+        }
       },
       //前往个人中心
       toUserInfo(){
         //获取sessionStorage中的id值
-        var id = JSON.parse(window.sessionStorage.getItem('user')).id
+        var id = JSON.parse(this.user).id
         //跳转到个人空间页，传id作为参数
         this.$router.push({ name: 'user', params: {id: id}})
       },
       //前往编辑页面
       getEdit(){
         //获取sessionStorage中的id值
-        var id = JSON.parse(window.sessionStorage.getItem('user')).id
+        var id = JSON.parse(this.user).id
         //跳转到编辑页面，传id作为参数
         this.$router.push({ name: 'edit', params: {id: id}})
       },

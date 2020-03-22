@@ -1,34 +1,48 @@
 <template>
   <div>
-    <el-row>
-      <el-col :span="19" :offset="3">
-        <div class="mid_title ">
-          文章标题
-        </div>
-      </el-col>
-      <el-col :span="19" :offset="3">
-        <div >
-          <el-input  v-model="title" size="medium"></el-input>
-        </div>
-      </el-col>
-      <el-col :span="19" :offset="3">
-        <div class="mid_title ">
-          文章封面
-        </div>
-      </el-col>
-      <el-col :span="19" :offset="3">
-        <div style="background-color: #FFFFFF;">
-          <!-- <el-image :src="imgurl"></el-image> -->
-          <img-upload @onUpload="uploadImg" ref="imgUpload"></img-upload>
-        </div>
-      </el-col>
 
-      <el-col :span="19" :offset="3">
+    <div>
+      <el-row>
+        <el-col :span="8" :offset="4">
+            <div class="mid_title ">
+                文章标题
+            </div>
+            <div >
+              <el-input  v-model="title" size="medium"></el-input>
+            </div>
+            <div class="mid_title ">
+                文章分类
+            </div>
+            <div >
+              <el-select v-model="value" placeholder="请选择" style="width: 500px;">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </div>
+        </el-col>
+
+        <el-col :span="8" :offset="1">
+            <div class="mid_title ">
+              文章封面
+            </div>
+            <div style="background-color: #FFFFFF;">
+              <img-upload @onUpload="uploadImg" ref="imgUpload"></img-upload>
+            </div>
+        </el-col>
+      </el-row>
+    </div>
+    <el-row>
+
+      <el-col :span="17" :offset="4">
         <div class="mid_title ">
           文章内容
         </div>
       </el-col>
-      <el-col :span="19" :offset="3">
+      <el-col :span="17" :offset="4">
         <div class="mid">
             <quill-editor
                 v-model="content"
@@ -40,7 +54,7 @@
 
         </div>
       </el-col>
-      <el-col :span="19" :offset="3">
+      <el-col :span="17" :offset="4">
         <div class="foot">
           <router-link to="/article">
           <el-button   class="loginBut" > 取 消 </el-button>
@@ -74,6 +88,15 @@
     components: {ImgUpload},
     data(){
       return {
+        options: [{
+          value: 'FOOTBALL',
+          label: '足球'
+        }, {
+          value: 'BASKETBALL',
+          label: '篮球'
+        }],
+        value: '',
+
         content: '',
         title: '',
         imgurl: '',
@@ -128,7 +151,8 @@
             title: this.title,
             content: this.content,
             userid: this.userid,
-            imgurl: this.imgurl
+            imgurl: this.imgurl,
+            type: this.value,
           }).then(resp =>{
              if (resp.data.code === 200) {
                //发表成功
@@ -137,7 +161,7 @@
                  //回调函数
                  callback: action => {
                     onclick:{
-                      this.$router.replace({path: '/article'})
+                      this.$router.replace({path: '/index'})
                     }
                  }
                })
