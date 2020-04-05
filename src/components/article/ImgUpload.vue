@@ -12,15 +12,18 @@
     :on-exceed="handleExceed"
     :file-list="fileList"
     >
-    <img v-if="url" :src="url" class="avatar">
+    <!--第一个判断是否是编辑，编辑的话父组件会传过来-->
+    <img v-if="imgurl" :src="imgurl" class="avatar">
+    <img v-else-if="url" :src="url" class="avatar">
     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-    <!-- <el-button round  size="medium" class="head_btn ">上传封面</el-button> -->
   </el-upload>
 </template>
 
 <script>
   export default {
     name: 'ImgUpload',
+
+    props: ['imgurl'],
     data () {
       return {
         fileList: [],

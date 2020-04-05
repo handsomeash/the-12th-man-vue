@@ -17,7 +17,7 @@
             <div>
               <el-row>
                 <el-col :span="12"><div class="author" style="cursor:pointer" @click="toArticle(item.articleDetailId)">查看文章</div></el-col>
-                <el-col :span="12"><div class="author" style="text-align: right; cursor:pointer" @click="cancelCollect(item.id)">取消收藏</div></el-col>
+                <el-col :span="12"><div class="author" style="text-align: right; cursor:pointer" @click="toEditArticle(item.articleDetailId)">编辑文章</div></el-col>
               </el-row>
             </div>
 
@@ -36,7 +36,7 @@
       </el-row>
     </div>
 
-    <!--如果没有收藏的文章-->
+    <!--如果没有发表的文章-->
     <div v-else style="font-size: 14px; ">
       还没有内容
     </div>
@@ -46,7 +46,7 @@
 <script>
   export default{
     inject:["reload"],
-    name: 'CollectArticle',
+    name: 'WriteArticle',
      data(){
         return{
           total:0,
@@ -64,7 +64,7 @@
        //获取文章信息
        getArticles(){
          var userId = JSON.parse(window.sessionStorage.getItem('user')).id
-         this.$axios.post('/article/collection',{
+         this.$axios.post('/article/write',{
              current: this.currentPage,
              pagesize: this.pagesize,
              userId: userId
@@ -86,28 +86,11 @@
          console.log('前往文章页面')
          this.$router.push({ name: 'ArticleDetail', params: {id: id}})
        },
-       //取消收藏
-       cancelCollect(id){
-         var userId = JSON.parse(window.sessionStorage.getItem('user')).id
-          this.$axios.post('/article/cancelCollect',{
-           userId: userId,
-           articleId : id,
-         }).then(resp =>{
-           if (resp.data.code === 200){
-              this.$message({
-               message: resp.data.message,
-               type: 'success'
-             })
-             //刷新
-             this.reload()
-           }else{
-             this.$message({
-               message: resp.data.message,
-               type: 'warning'
-             })
-           }
-         }).catch(failResponse => {})
-       }
+       //前往编辑文章页面
+       toEditArticle(id){
+         console.log('前往编辑文章页面')
+         this.$router.push({ name: 'write', params: {articleId: id}})
+       },
      }
   }
 </script>
@@ -152,5 +135,4 @@
     color: #303133;
     text-decoration: none;
   }
-
 </style>

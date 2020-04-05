@@ -15,25 +15,25 @@
               <el-menu-item index="1">
                 <template slot="title">
                   <i class="el-icon-location"></i>
-                  <span style="font-weight: 900;">修改头像&#8195</span>
+                  <span style="font-weight: 900;" @click="toA">修改头像&#8195</span>
                 </template>
               </el-menu-item>
               <el-menu-item index="2">
                 <i class="el-icon-menu"></i>
-                <span slot="title" style="font-weight: 900;">个人资料&#8195</span>
+                <span slot="title" style="font-weight: 900;" @click="toB">个人资料&#8195</span>
               </el-menu-item>
               <el-menu-item index="4">
                 <i class="el-icon-setting"></i>
-                <span slot="title" style="font-weight: 900;">账号与安全</span>
+                <span slot="title" style="font-weight: 900;" @click="toC">账号与安全</span>
               </el-menu-item>
             </el-menu>
          </div>
         </el-aside>
 
         <el-main>
-          <div class="part">
+          <div class="part" id="a">
             <el-row>
-              <el-col :span="24" class="title_color"><div class="title font_left font_style">修改头像</div></el-col>
+              <el-col :span="24" class="title_color"><div class="title font_left font_style" >修改头像</div></el-col>
             </el-row>
             <el-row class="inside inside_color inside_end inside_top">
               <el-col :span="4" ><div class="font_left font_style head_text ">头像</div></el-col>
@@ -59,10 +59,10 @@
             </el-row>
           </div>
 
-          <el-form :model="user" :rules="editRules" ref="editForm">
-            <div class="part">
+          <el-form :model="user" :rules="editRules" ref="editForm" >
+            <div class="part" id="b">
               <el-row>
-                <el-col :span="24" class="title_color"><div class="title font_left font_style">个人资料</div></el-col>
+                <el-col :span="24" class="title_color"><div class="title font_left font_style" >个人资料</div></el-col>
               </el-row>
               <el-row class="inside inside_color inside_top">
                 <el-col :span="4" ><div class="font_left font_style left_text_style">昵称</div></el-col>
@@ -100,9 +100,9 @@
               </el-row>
             </div>
 
-            <div class="part">
+            <div class="part" id="c">
               <el-row>
-                <el-col :span="24" class="title_color"><div class="title font_left font_style">账号与安全</div></el-col>
+                <el-col :span="24" class="title_color"><div class="title font_left font_style" >账号与安全</div></el-col>
               </el-row>
               <el-row class="inside inside_color inside_top">
                 <el-col :span="4" ><div class="font_left font_style left_text_style">手机</div></el-col>
@@ -199,7 +199,15 @@
           this.user = resp.data
         }).catch(failResponse => {})
       },
-
+      toA(){
+        document.querySelector("#a").scrollIntoView(true);
+      },
+      toB(){
+        document.querySelector("#b").scrollIntoView(true);
+      },
+      toC(){
+        document.querySelector("#c").scrollIntoView(true);
+      },
       edit(formName){
         this.$refs[formName].validate((valid) =>{
           if (valid) {

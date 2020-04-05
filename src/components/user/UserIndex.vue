@@ -6,6 +6,9 @@
         <div class="left_title">
           投稿的文章
         </div>
+        <div class="left_article">
+          <WriteArticle></WriteArticle>
+        </div>
         <div class="left_title">
           收藏的文章
         </div>
@@ -49,9 +52,10 @@
 
 <script>
   import CollectArticle from './CollectArticle'
+  import WriteArticle from './WriteArticle'
   export default {
     name: 'UserIndex',
-    components: {CollectArticle},
+    components: {CollectArticle,WriteArticle},
     data(){
       return{
         user: [],

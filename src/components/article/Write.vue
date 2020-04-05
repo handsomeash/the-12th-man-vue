@@ -30,7 +30,7 @@
               文章封面
             </div>
             <div style="background-color: #FFFFFF;">
-              <img-upload @onUpload="uploadImg" ref="imgUpload"></img-upload>
+              <img-upload @onUpload="uploadImg" ref="imgUpload" :imgurl="imgurl"></img-upload>
             </div>
         </el-col>
       </el-row>
@@ -56,10 +56,11 @@
       </el-col>
       <el-col :span="17" :offset="4">
         <div class="foot">
-          <router-link to="/article">
+          <router-link to="/index">
           <el-button   class="loginBut" > 取 消 </el-button>
           </router-link>
-          <el-button type="primary"  class="loginBut"  v-on:click="write"> 发 表 </el-button>
+          <el-button v-if="editflag" type="primary"  class="loginBut"  v-on:click="write"> 编辑 </el-button>
+          <el-button v-else type="primary"  class="loginBut"  v-on:click="write"> 发 表 </el-button>
         </div>
       </el-col>
     </el-row>
@@ -96,10 +97,12 @@
           label: '篮球'
         }],
         value: '',
-
+        //用来标记是否是编辑
+        editflag: '',
         content: '',
         title: '',
         imgurl: '',
+        articleId: '',
         userid: JSON.parse(window.sessionStorage.getItem('user')).id,
         editorOption: {
           modules: {
@@ -135,6 +138,17 @@
         return this.$refs.myQuillEditor.quill;
       },
     },
+    //钩子函数
+    mounted() {
+      //如果是个人中心点击编辑文章跳转的，则执行编辑文章方法
+      var articleId = this.$route.params.articleId
+      if(articleId != null){
+
+        console.log("文章id是"+articleId)
+        this.getArticle(articleId)
+      }
+
+    },
     methods: {
         //上传图片
         uploadImg () {
@@ -145,6 +159,21 @@
         onEditorBlur(){}, // 失去焦点事件
         onEditorFocus(){}, // 获得焦点事件
         onEditorChange(){}, // 内容改变事件
+
+        //获取要编辑的文章信息
+        getArticle(articleId){
+          this.$axios.get('/getEditArticle/'+articleId).then(resp => {
+            console.log(resp.data)
+            //赋值
+            this.title = resp.data.title
+            this.content = resp.data.content
+            this.imgurl = resp.data.imgUrl
+            this.value = resp.data.articleType
+            this.articleId = resp.data.id
+            this.editflag = true
+          }).catch(failResponse => {})
+        },
+
         //发表文章
         write(){
           this.$axios.post('/write',{
@@ -173,6 +202,32 @@
           }).catch(failResponse => {})
         },
 
+        //编辑文章
+        write(){
+          this.$axios.post('/editArticle',{
+            title: this.title,
+            content: this.content,
+            type: this.value,
+            articleId: this.articleId,
+          }).then(resp =>{
+             if (resp.data.code === 200) {
+               //编辑成功
+               this.$alert(resp.data.message, '提示', {
+                 confirmButtonText: '确定',
+                 //回调函数
+                 callback: action => {
+                    onclick:{
+                      this.$router.replace({path: '/index'})
+                    }
+                 }
+               })
+             }else {
+                this.$alert(resp.data.message, '提示', {
+                confirmButtonText: '确定'
+                 })
+             }
+          }).catch(failResponse => {})
+        },
     },
   }
 </script>

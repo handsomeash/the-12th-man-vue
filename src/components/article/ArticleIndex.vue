@@ -118,7 +118,9 @@
   }
 
   .cover {
-    width: 100%;
+    /* width: 100%; */
+    width: 270px;
+    height: 165px;
     display: block;
 
   }

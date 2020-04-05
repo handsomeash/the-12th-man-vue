@@ -8,7 +8,7 @@
         <el-button type="primary" icon="el-icon-star-on" @click="collect" circle ></el-button>
       </p>
       <p>
-        <el-button type="primary" icon="el-icon-chat-dot-round"  circle></el-button>
+        <el-button type="primary" icon="el-icon-chat-dot-round" @click="toComment" circle></el-button>
       </p>
       <p>
         <el-button type="primary" icon="el-icon-share"  circle></el-button>
@@ -70,7 +70,7 @@
 
         <div>
           <el-row>
-            <el-col :span="24"><div class="topx font_left"><p>评论区</p></div></el-col>
+            <el-col :span="24"><div class="topx font_left" id="comment"><p>评论区</p></div></el-col>
           </el-row>
 
           <el-row>
@@ -84,7 +84,7 @@
 
           <el-row>
             <!--for循环评论内容-->
-            <el-col :span="24" style="text-align: left;">
+            <el-col :span="24" style="text-align: left;" >
               <div v-for="(item,i) in commentResp">
 
                 <el-row class="comment_top" v-if="item.user">
@@ -214,6 +214,9 @@
           this.commentResp = resp.data
 
         }).catch(failResponse => {})
+      },
+      toComment(){
+        document.querySelector("#comment").scrollIntoView(true);
       }
     }
   }
