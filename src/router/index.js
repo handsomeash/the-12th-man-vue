@@ -12,6 +12,10 @@ import UserIndex from "../components/user/UserIndex"
 import UserEdit from "../components/user/UserEdit"
 import Write from "../components/article/Write"
 import ArticleIndex from "../components/article/ArticleIndex"
+import AdminHome from "../components/admin/AdminHome"
+import AdminLogin from "../components/admin/AdminLogin"
+import UserAdmin from "../components/admin/UserAdmin"
+import ArticleAdmin from "../components/admin/ArticleAdmin"
 
 Vue.use(Router)
 
@@ -77,6 +81,23 @@ export default new Router({
       ]
     },
     {
+      path: '/adminhome',
+      name: 'AdminHome',
+      component: AdminHome,
+      children: [
+        {
+          path: '/useradmin',
+          name:'UserAdmin',
+          component: UserAdmin,
+        },
+        {
+          path: '/articleadmin',
+          name:'ArticleAdmin',
+          component: ArticleAdmin,
+        },
+      ]
+    },
+    {
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
@@ -90,6 +111,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
-    }
+    },
+    {
+      path: '/adminlogin',
+      name: 'AdminLogin',
+      component: AdminLogin
+    },
   ]
 })
