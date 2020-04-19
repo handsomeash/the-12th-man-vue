@@ -29,6 +29,6 @@
   }
   .main{
     margin-top: 50px;
-    height: 720px;
+    height: 725px;
   }
 </style>

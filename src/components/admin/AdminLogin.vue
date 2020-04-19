@@ -68,6 +68,9 @@
                  password: this.loginForm.password,
              }).then(resp => {
                if (resp.data.code === 200) {
+                 //存储到sessionstorage
+                 var data = resp.data.data
+                 this.$store.commit('adminLogin', data)
                  this.$router.replace({path: '/adminhome'})
                }else{
                  this.message = resp.data.message,

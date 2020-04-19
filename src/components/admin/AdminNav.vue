@@ -1,7 +1,7 @@
 <template>
 
     <el-menu
-      default-active="2"
+      default-active="1"
       class="menu"
       @select="handleSelect"
       background-color="#545c64"
@@ -17,7 +17,7 @@
         <span slot="title">文章管理</span>
       </el-menu-item>
       <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+        <i class="el-icon-chat-line-round"></i>
         <span slot="title">评论管理</span>
       </el-menu-item>
      <el-menu-item index="4">
@@ -38,6 +38,12 @@
               break;
           case '2':
               this.$router.push('/articleadmin');
+              break;
+          case '3':
+              this.$router.push('/commentadmin');
+              break;
+          case '4':
+              this.$router.push('/passwordadmin');
               break;
 
         }

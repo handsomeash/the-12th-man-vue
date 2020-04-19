@@ -79,12 +79,12 @@
           </el-row>
 
           <el-row class="totalComment">
-            <el-col :span="24"><div class="topx font_left "><p>共xx条评论</p></div></el-col>
+            <el-col :span="24"><div class="topx font_left "><p>共{{commentResp.length}}条评论</p></div></el-col>
           </el-row>
 
           <el-row>
             <!--for循环评论内容-->
-            <el-col :span="24" style="text-align: left;" >
+            <el-col v-if="commentResp.length>0" :span="24" style="text-align: left;" >
               <div v-for="(item,i) in commentResp">
 
                 <el-row class="comment_top" v-if="item.user">
@@ -107,6 +107,12 @@
                 </el-row>
 
 
+              </div>
+            </el-col>
+            <!--如果没有评论-->
+            <el-col v-else>
+              <div style="font-size: 15px; padding-top: 25px; padding-bottom: 20px;">
+                暂无评论
               </div>
             </el-col>
           </el-row>

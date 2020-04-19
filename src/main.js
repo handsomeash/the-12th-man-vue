@@ -59,6 +59,17 @@ router.beforeEach((to, from, next) => {
           query: {redirect: to.fullPath}
         })
       }
+    }
+
+    if (to.meta.requireAdmin){
+      if (store.state.admin.id) {
+        next()
+      } else {
+        next({
+          path: 'adminlogin',
+          query: {redirect: to.fullPath}
+        })
+      }
     } else {
       next()
     }

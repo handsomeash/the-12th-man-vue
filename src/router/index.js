@@ -16,6 +16,8 @@ import AdminHome from "../components/admin/AdminHome"
 import AdminLogin from "../components/admin/AdminLogin"
 import UserAdmin from "../components/admin/UserAdmin"
 import ArticleAdmin from "../components/admin/ArticleAdmin"
+import CommentAdmin from "../components/admin/CommentAdmin"
+import PasswordAdmin from "../components/admin/PasswordAdmin"
 
 Vue.use(Router)
 
@@ -84,16 +86,39 @@ export default new Router({
       path: '/adminhome',
       name: 'AdminHome',
       component: AdminHome,
+      redirect: '/useradmin',
       children: [
         {
           path: '/useradmin',
           name:'UserAdmin',
           component: UserAdmin,
+          meta: {
+            requireAdmin: true
+          }
         },
         {
           path: '/articleadmin',
           name:'ArticleAdmin',
           component: ArticleAdmin,
+          meta: {
+            requireAdmin: true
+          }
+        },
+        {
+          path: '/commentadmin',
+          name:'CommentAdmin',
+          component: CommentAdmin,
+          meta: {
+            requireAdmin: true
+          }
+        },
+        {
+          path: '/passwordadmin',
+          name:'PasswordAdmin',
+          component: PasswordAdmin,
+          meta: {
+            requireAdmin: true
+          }
         },
       ]
     },

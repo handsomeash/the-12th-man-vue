@@ -2,42 +2,32 @@
   <div>
     <div style="height: 600px;">
       <el-table
-          :data="users"
+          :data="comments"
           style="width: 100%">
           <el-table-column
-            prop="username"
-            label="账号"
-            width="150">
-          </el-table-column>
-          <el-table-column
-            prop="nickname"
-            label="昵称"
-            width="150">
-          </el-table-column>
-          <el-table-column
-            prop="password"
-            label="密码"
+            prop="articleName"
+            label="文章标题"
             width="300">
           </el-table-column>
           <el-table-column
-            prop="email"
-            label="邮箱"
+            prop="content"
+            label="评论内容"
+            width="400">
+          </el-table-column>
+          <el-table-column
+            prop="user.nickname"
+            label="用户名称"
             width="180">
           </el-table-column>
           <el-table-column
-            prop="phone"
-            label="电话"
-            width="150">
-          </el-table-column>
-          <el-table-column
-            prop="registerDate"
-            label="注册日期"
-            width="150">
+            prop="createDate"
+            label="评论时间"
+            width="180">
           </el-table-column>
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="deleteUser(scope.row)">删除</el-button>
+              <el-button type="text" size="small" @click="deleteComment(scope.row)">删除</el-button>
             </template>
           </el-table-column>
       </el-table>
@@ -59,36 +49,36 @@
 </template>
 
 <script>
-  export default {
+  export default{
     inject:["reload"],
-    name: 'UserAdmin',
+    name: 'CommentAdmin',
     data(){
       return{
-        users: [],
+        comments: [],
         total:0,
         currentPage: 1,
         pagesize: 9
       }
     },
     mounted() {
-      this.getUsers()
+      this.getComments()
     },
     methods:{
-      getUsers(){
-        this.$axios.post('/useradmin',{
+      getComments(){
+        this.$axios.post('/commentadmin',{
             current: this.currentPage,
             pagesize: this.pagesize,
         }).then(resp =>{
-          this.users = resp.data.users
+          this.comments = resp.data.comments
           this.total = resp.data.total
         }).catch(failResponse => {})
       },
       handleCurrentChange(val) {
         this.currentPage = val
-        this.getUsers()
+        this.getComments()
       },
-      deleteUser(user){
-        this.$axios.get('/deleteUser/'+user.id).then(resp => {
+      deleteComment(comment){
+        this.$axios.get('/deleteComment/'+comment.id).then(resp => {
           this.$alert(resp.data.message, '提示', {
             confirmButtonText: '确定',
             //回调函数

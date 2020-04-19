@@ -14,7 +14,11 @@
       </el-col>
       <el-col :span="7" :offset="1" class="mid_right">
         <div>
-          网易云&#8195QQ&#8195知乎&#8195豆瓣&#8195微博
+          <a href="https://music.163.com/#/user/home?id=102139461">网易云</a>&#8195
+          <a href="https://space.bilibili.com/46494503">bilibili</a>&#8195
+          <a href="https://www.zhihu.com/people/fyj-90">知乎</a>&#8195
+          <a href="https://www.douban.com/people/161739062/">豆瓣</a>&#8195
+          <a href="https://weibo.com/3934990403/profile?topnav=1&wvr=6&is_all=1">微博</a>&#8195
         </div>
         <el-image :src="src" style="width: 100px; height: 100px;padding-top: 20px;"></el-image>
       </el-col>
