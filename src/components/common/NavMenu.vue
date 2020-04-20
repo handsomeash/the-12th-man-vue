@@ -17,10 +17,10 @@
       <span style="position: absolute;padding-top: 11px;right: 44%;font-size: 20px;color: #F44336 ;font-weight: 900;"> - The 12th Man - </span>
       <el-input
         placeholder="搜索..."
-        prefix-icon="el-icon-search"
         size="medium"
         style="width: 300px;position:absolute;margin-top: 9px;right: 10%"
         v-model="keywords">
+        <el-button slot="append" icon="el-icon-search" @click="searchClick"></el-button>
       </el-input>
       <div v-if="user === null">
         <router-link to="/login">
@@ -130,6 +130,11 @@
           }
         })
       },
+      //搜索框
+      searchClick(){
+        var keywords = this.keywords
+        this.$router.push({ name: 'articles', params: {type: keywords}})
+      }
     }
   }
 </script>

@@ -6,8 +6,8 @@
 
         <el-col :span="1" :offset="3"><h3 >文 章</h3></el-col>
         <el-col :span="20" :offset="3">
-          <div>
-            <el-row >
+          <div  v-if="total>0">
+            <el-row>
                 <el-card :body-style="{ padding: '0px' }"
                   v-for="item in articles"
                   :key="item.id"
@@ -52,6 +52,12 @@
               </el-pagination>
             </el-row>
           </div>
+
+          <!--如果没有数据-->
+          <div v-else style="font-size: 15px; padding-top: 25px; padding-bottom: 70px; text-align: center;">
+            没有找到关于 “{{type}}” 的文章，换个搜索词试试吧。
+          </div>
+
         </el-col>
       </el-row>
 
@@ -84,15 +90,15 @@
     methods:{
       //获取文章信息
       getArticles(){
-        this.type = this.$route.params.type
-        this.$axios.post('/article',{
-            current: this.currentPage,
-            pagesize: this.pagesize,
-            type: this.type
-        }).then(resp =>{
-          this.articles = resp.data.articles
-          this.total = resp.data.total
-        }).catch(failResponse => {})
+          this.type = this.$route.params.type
+          this.$axios.post('/article',{
+              current: this.currentPage,
+              pagesize: this.pagesize,
+              type: this.type
+          }).then(resp =>{
+            this.articles = resp.data.articles
+            this.total = resp.data.total
+          }).catch(failResponse => {})
       },
       handleCurrentChange(val) {
         this.currentPage = val
