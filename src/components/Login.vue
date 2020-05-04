@@ -17,7 +17,7 @@
       </el-form-item>
       <div>
         <el-checkbox v-model="checked" class="font_left"><small>记住我</small></el-checkbox>
-        <router-link to="/" class="font_right" ><small >找回密码</small></router-link>
+        <!-- <router-link to="/" class="font_right" ><small >找回密码</small></router-link> -->
       </div>
       <el-form-item style="padding-top: 37px;">
           <el-button type="danger" class="login_button" v-on:click="login('loginForm')">登 录</el-button>

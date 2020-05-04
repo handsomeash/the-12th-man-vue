@@ -48,7 +48,8 @@
                 v-model="content"
                 ref="myQuillEditor"
                 :options="editorOption"
-                @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
+                @blur="onEditorBlur($event)"
+                @focus="onEditorFocus($event)"
                 @change="onEditorChange($event)">
             </quill-editor>
 
@@ -59,7 +60,7 @@
           <router-link to="/index">
           <el-button   class="loginBut" > 取 消 </el-button>
           </router-link>
-          <el-button v-if="editflag" type="primary"  class="loginBut"  v-on:click="write"> 编辑 </el-button>
+          <el-button v-if="editflag" type="primary"  class="loginBut"  v-on:click="edit"> 编辑 </el-button>
           <el-button v-else type="primary"  class="loginBut"  v-on:click="write"> 发 表 </el-button>
         </div>
       </el-col>
@@ -129,7 +130,8 @@
               ['clean'],    //清除字体样式
               ['image']    //上传图片
             ]
-          }
+          },
+          placeholder: '请输入正文'
         },
       }
     },
@@ -203,7 +205,7 @@
         },
 
         //编辑文章
-        write(){
+        edit(){
           this.$axios.post('/editArticle',{
             title: this.title,
             content: this.content,
@@ -233,6 +235,14 @@
 </script>
 
 <style scoped>
+  #app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
   .mid{
     background-color: #FFFFFF;
     height: 750px;
@@ -240,6 +250,12 @@
 
   .ql-container {
     font-size:16px;
+  }
+  .ql-clipboard {
+    position: fixed;
+    display: none;
+    left: 50%;
+    top: 50%;
   }
   .mid_title{
     margin-top: 40px;

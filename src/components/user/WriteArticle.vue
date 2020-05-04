@@ -119,6 +119,7 @@
     font-weight: 800;
     text-align: left;
     padding: 20px;
+
   }
 
 

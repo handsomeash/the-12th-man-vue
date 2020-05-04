@@ -21,7 +21,7 @@
     data(){
       var validatePass = (rule, value, callback) => {
         if (value == this.ruleForm.oldPassword) {
-          callback(new Error('两次输入密码不一致!'));
+          callback(new Error('两次输入密码一致!'));
         } else {
           callback();
         }
@@ -30,7 +30,6 @@
         ruleForm: {
           oldPassword: '',
           newPassword: '',
-
         },
         rules:{
           oldPassword:[
@@ -51,12 +50,14 @@
         //校验判断，如果校验失败，则不会执行提交逻辑
         this.$refs[formName].validate((valid) =>{
           if (valid) {
+            var adminId = JSON.parse(window.sessionStorage.getItem('admin')).id
+            console.log("管理员"+adminId)
             this.$axios.put('/passwordAdmin',{
+              id: adminId,
               oldPassword: this.ruleForm.oldPassword,
               newPassword: this.ruleForm.newPassword,
             }).then(resp =>{
               if (resp.data.code === 200) {
-
                 //将数据置空，否则之前数据会显示
                 this.ruleForm.oldPassword = ''
                 this.ruleForm.newPassword = ''

@@ -10,9 +10,9 @@
       <p>
         <el-button type="primary" icon="el-icon-chat-dot-round" @click="toComment" circle></el-button>
       </p>
-      <p>
+<!--      <p>
         <el-button type="primary" icon="el-icon-share"  circle></el-button>
-      </p>
+      </p> -->
 
     </div>
 

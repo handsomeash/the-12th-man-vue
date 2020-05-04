@@ -7,7 +7,7 @@
           <el-table-column
             prop="title"
             label="标题"
-            width="400">
+            width="450">
           </el-table-column>
           <el-table-column
             prop="articleType"

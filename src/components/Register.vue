@@ -47,7 +47,7 @@
               ],
               password:[
                 { required: true, message: '密码不能为空', trigger: 'blur' },
-                { min: 3, max: 30, message: '密码长度在 3~30 个字符之间', trigger: 'blur' }
+                { min: 6, max: 30, message: '密码长度在 6~30 个字符之间', trigger: 'blur' }
               ],
               nickname:[
                 { required: true, message: '昵称不能为空', trigger: 'blur' },

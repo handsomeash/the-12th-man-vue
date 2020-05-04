@@ -19,6 +19,7 @@ import ArticleAdmin from "../components/admin/ArticleAdmin"
 import CommentAdmin from "../components/admin/CommentAdmin"
 import PasswordAdmin from "../components/admin/PasswordAdmin"
 
+
 Vue.use(Router)
 
 //如果路由跳转同一个页面，会报错
@@ -142,5 +143,6 @@ export default new Router({
       name: 'AdminLogin',
       component: AdminLogin
     },
+
   ]
 })

@@ -134,6 +134,8 @@
       searchClick(){
         var keywords = this.keywords
         this.$router.push({ name: 'articles', params: {type: keywords}})
+        //将搜索框清空
+        this.keywords=""
       }
     }
   }
